@@ -1,0 +1,282 @@
+/* App.css - Hacker Terminal Style (Responsive) */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #000;
+  color: #00ff00;
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(12px, 2.5vw, 14px); /* Responsive base font size */
+  line-height: 1.4;
+  overflow-x: hidden;
+}
+
+.app {
+  min-height: 100vh;
+  padding: clamp(10px, 5vw, 20px); /* Responsive padding */
+  background: linear-gradient(180deg, #000 0%, #001100 100%);
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: clamp(15px, 5vh, 30px);
+  border-bottom: 1px solid #00ff00;
+  padding-bottom: clamp(5px, 2vh, 10px);
+}
+
+.title {
+  font-size: clamp(18px, 5vw, 24px); /* Scale title responsively */
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  text-shadow: 0 0 10px #00ff00;
+}
+
+.subtitle {
+  font-size: clamp(10px, 2vw, 12px);
+  opacity: 0.7;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0.3; }
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: clamp(10px, 3vh, 20px);
+  flex-wrap: wrap;
+  gap: clamp(5px, 1vw, 10px);
+}
+
+.tab {
+  background: transparent;
+  border: 1px solid #00ff00;
+  color: #00ff00;
+  padding: clamp(6px, 1.5vw, 8px) clamp(10px, 2vw, 16px);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: clamp(10px, 2vw, 12px);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap; /* Prevent text wrap on small screens */
+  min-width: fit-content;
+}
+
+.tab:hover {
+  background: #00ff00;
+  color: #000;
+  box-shadow: 0 0 15px #00ff00;
+}
+
+.tab.active {
+  background: #00ff00;
+  color: #000;
+  animation: pulse 0.5s ease;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 #00ff00; }
+  70% { box-shadow: 0 0 0 10px rgba(0, 255, 0, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 255, 0, 0); }
+}
+
+/* Mobile: Stack tabs vertically if screen is very narrow */
+@media (max-width: 480px) {
+  .tabs {
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .tab {
+    width: 100%;
+    max-width: 250px;
+    text-align: center;
+  }
+}
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: clamp(10px, 3vh, 20px);
+  font-size: clamp(10px, 2vw, 11px);
+  opacity: 0.6;
+  border: 1px dashed #00ff00;
+  padding: clamp(8px, 2vw, 10px);
+  background: rgba(0, 255, 0, 0.05);
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Tablet/Mobile: Stack stats */
+@media (max-width: 768px) {
+  .stats {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 5px;
+  }
+
+  .stats span {
+    width: 100%;
+  }
+}
+
+.list-container {
+  max-height: clamp(50vh, 70vh, 60vh); /* Adjust max-height responsively */
+  overflow-y: auto;
+  border: 2px solid #00ff00;
+  background: rgba(0, 0, 0, 0.8);
+  flex: 1; /* Take remaining space in column layout */
+}
+
+.user-list {
+  list-style: none;
+  padding: 0;
+}
+
+.user-item {
+  display: flex;
+  align-items: center;
+  padding: clamp(8px, 2vw, 12px) clamp(10px, 3vw, 20px);
+  border-bottom: 1px solid #003300;
+  transition: background 0.2s ease;
+  animation: scan 0.5s ease-in-out;
+}
+
+.user-item:hover {
+  background: rgba(0, 255, 0, 0.1);
+}
+
+.user-item:last-child {
+  border-bottom: none;
+}
+
+@keyframes scan {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.profile-pic {
+  width: clamp(32px, 6vw, 40px); /* Responsive profile pic size */
+  height: clamp(32px, 6vw, 40px);
+  border-radius: 50%;
+  margin-right: clamp(10px, 2vw, 15px);
+  border: 2px solid #00ff00;
+  box-shadow: 0 0 8px #00ff00;
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+/* Mobile: Stack user-item vertically for very small screens */
+@media (max-width: 480px) {
+  .user-item {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: clamp(10px, 4vw, 12px);
+    gap: 8px;
+  }
+
+  .username {
+    font-size: clamp(12px, 3vw, 13px);
+  }
+
+  .status {
+    align-self: flex-end;
+  }
+}
+
+.username {
+  flex: 1;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: clamp(11px, 2.5vw, 13px);
+  min-width: 0; /* Allow truncation if needed */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.status {
+  font-size: clamp(9px, 1.5vw, 10px);
+  opacity: 0.7;
+  padding: 2px 8px;
+  background: #00ff00;
+  color: #000;
+  border-radius: 4px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.no-data {
+  text-align: center;
+  padding: clamp(20px, 10vh, 40px);
+  font-style: italic;
+  opacity: 0.5;
+  animation: blink 2s infinite;
+}
+
+.footer {
+  text-align: center;
+  margin-top: clamp(10px, 3vh, 20px);
+  padding-top: 10px;
+  border-top: 1px solid #00ff00;
+  font-size: clamp(10px, 2vw, 11px);
+  opacity: 0.4;
+}
+
+/* Scrollbar Styling for Hacker Vibe (Responsive) */
+.list-container::-webkit-scrollbar {
+  width: clamp(6px, 1.5vw, 8px);
+}
+
+.list-container::-webkit-scrollbar-track {
+  background: #000;
+}
+
+.list-container::-webkit-scrollbar-thumb {
+  background: #00ff00;
+  border-radius: 4px;
+}
+
+.list-container::-webkit-scrollbar-thumb:hover {
+  background: #00cc00;
+}
+
+/* Additional Responsive Tweaks for Larger Screens */
+@media (min-width: 1200px) {
+  .app {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .tabs {
+    justify-content: flex-start;
+    gap: 15px;
+  }
+}
+
+/* Landscape Mobile Fix */
+@media (max-height: 500px) and (orientation: landscape) {
+  .list-container {
+    max-height: 70vh;
+  }
+
+  .header {
+    margin-bottom: 15px;
+  }
+}
